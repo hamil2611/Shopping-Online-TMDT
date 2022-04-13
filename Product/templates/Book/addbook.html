@@ -1,0 +1,25 @@
+
+{% extends 'Base/base.html' %}
+{% block book%}
+<div class="container form-group">
+        
+    <form class ="formbook col-8 offset-2 " action="{% url 'savebook'%}" method="POST" enctype="multipart/form-data">
+        <h1 class="offset-3">THÔNG TIN SÁCH</h1>
+        {% csrf_token %}
+        <label for="">Tên sách:</label>
+        <input  type="text" name="tensach" class="form-control">
+        <p>Năm xuất bản:<input   type="text" name="namxuatban" class="form-control"></p>
+        <p>Ngôn ngữ:<input  type="text" name="ngonngu" class="form-control"></p>
+        <p>Giá<input type="text" name="gia" class="form-control"></p>
+        <p>Tác giả:<input type="text" name="tacgia" class="form-control"></p>
+        <p>Nhà xuất bản:<input  type="text" name="nhaxuatban" class="form-control"></p>
+        <p>Số lượng:<input  type="text" name="soluong" class="form-control"></p>
+        <p>Mô tả: <textarea name="mota"  cols="79" rows="5"></textarea></p>
+        <p><input type="file" name="anh" ></p>
+        <p class="text-danger">{{requestrp}}</p>
+        <span class="offset-3"><a class="btn btn-info" href="{% url 'viewbook' %}">Trở về</a></span>
+        <button class="button btn btn-success offset-2" type="submit">Lưu sản phẩm</button>
+        
+    </form>
+</div>
+{% endblock %}

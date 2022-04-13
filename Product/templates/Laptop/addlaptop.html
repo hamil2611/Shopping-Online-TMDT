@@ -1,0 +1,23 @@
+
+{% extends 'Base/base.html' %}
+{% block book%}
+<div class="container form-group">
+        
+    <form class ="formbook col-8 offset-2 " action="{% url 'savelaptop'%}" method="POST" enctype="multipart/form-data">
+        <h1 class="offset-3">THÔNG TIN LAPTOP</h1>
+        {% csrf_token %}
+        <label for="">Tên Laptop:</label>
+        <input  type="text" name="tenlaptop" class="form-control">
+        <p>Hãng sản xuất:<input   type="text" name="hangsx" class="form-control"></p>
+        <p>Kích thước màn hình:<input  type="text" name="size" class="form-control"></p>
+        <p>Kiểu dáng máy<input type="text" name="kieumay" class="form-control"></p>
+        <p>Giá:<input type="text" name="gia" class="form-control"></p>
+        <p>Số lượng:<input  type="text" name="soluong" class="form-control"></p>
+        <p>Mô tả: <textarea name="mota"  cols="79" rows="5"></textarea></p>
+        <p><input type="file" name="anh" ></p>
+        <p class="text-danger">{{requestrp}}</p>
+        <span class="offset-3"><a class="btn btn-info" href="{% url 'viewlaptop' %}">Trở về</a></span>
+        <button class="button btn btn-success offset-2" type="submit">Lưu sản phẩm</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'Base/base.html' %}
+{% block book%}
+<h1 class="text-center text-info"><strong>DANH SÁCH SẢN PHẨM LAPTOP</strong></h1>
+<table border="1"  class="table table-bordered ">
+    <tr>
+        <td class="text-info"><b>Mã LAPTOP</b></td>
+        <td class="text-info"><b>Tên LAPTOP</b></td>
+        <td class="text-info"><b>Hãng Sản Xuất</b></td>
+        <td class="text-info"><b>Kích Thước Màn Hình</b></td>
+        <td class="text-info"><b>Kiểu Dáng Máy</b></td>
+        <td class="text-info"><b>Giá</b></td>
+        <td class="text-info"><b>Ảnh</b></td>
+        <td class="text-info"><b>Xóa</b></td>
+        <td class="text-info"><b>Sửa</b></td>
+    </tr>
+    {% for item in dslaptop %}
+    <tr>
+        <td>{{item.laptop_id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.brand}}</td>
+        <td>{{item.screensize}}</td>  
+        <td>{{item.model}}</td>
+        <td>{{item.price}}</td>
+        <td><img src="../../../Image/media/{{item.images}}" alt="" style="width: 80px; height: 80px;"></td>
+        <td><a href="{% url 'delete' item.laptop_id%}" class="text-danger"><i class="fas fa-trash-alt fa-2x"></a></td>
+        <td><a href="{% url 'delete' item.laptop_id%}" class="text-warning"><i class="fas fa-wrench fa-2x"></i></a></td>
+    </tr>
+    {% endfor %}
+</table>
+<a class="btn btn-info" href="{% url 'pageaddlaptop' %}">Thêm Sản Phẩm Laptop</a>
+{% endblock %}

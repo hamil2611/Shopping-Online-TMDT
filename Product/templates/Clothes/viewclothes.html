@@ -1,0 +1,33 @@
+{% extends 'Base/base.html' %}
+{% block clothes %}
+<h1 class="text-center text-info"><strong>DANH SÁCH SẢN PHẨM QUẦN ÁO</strong></h1>
+<table border="1"  class="table table-bordered ">
+    <tr>
+        <td class="text-info"><b>Mã Sản Phẩm</b></td>
+        <td class="text-info"><b>Tên Sản Phẩm</b></td>
+        <td class="text-info"><b>Hãng Sản Xuất</b></td>
+        <td class="text-info"><b>Size</b></td>
+        <td class="text-info"><b>Màu</b></td>
+        <td class="text-info"><b>Chất liệu</b></td>
+        <td class="text-info"><b>Giá</b></td>
+        <td class="text-info"><b>Ảnh</b></td>
+        <td class="text-info"><b>Xóa</b></td>
+        <td class="text-info"><b>Sửa</b></td>
+    </tr>
+    {% for item in dsclothes %}
+    <tr>
+        <td>{{item.clothes_id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.brand}}</td>
+        <td>{{item.size}}</td>  
+        <td>{{item.color}}</td>
+        <td>{{item.material}}</td>
+        <td>{{item.price}}</td>
+        <td><img src="../../../Image/media/{{item.images}}" alt="" style="width: 80px; height: 80px;"></td>
+        <td><a href="" class="text-danger"><i class="fas fa-trash-alt fa-2x"></a></td>
+        <td><a href="" class="text-warning"><i class="fas fa-wrench fa-2x"></i></a></td>
+    </tr>
+    {% endfor %}
+</table>
+<a class="btn btn-info" href="{% url 'pageaddclothes' %}">Thêm Sản Phẩm Quần Áo</a>
+{% endblock %}

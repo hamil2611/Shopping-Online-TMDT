@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css"> 
+    <link rel="stylesheet" href="{% static 'font/css/all.min.css' %}" type="text/css"> 
+    <link rel="stylesheet" href=".../css/style.css">
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/jquery.slim.min.js"></script>
+    <title>Quản Lý Sản Phẩm</title>
+    <style>
+      .nav-item{
+        margin: 10px;
+      }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid m-0 p-0">
+      <div class="container-fluid pl-0 pr-0 pb-0">
+          <div class="row no-gutters">
+              <!--Menu Quan Ly-->
+              <div class=" col-md-3 col-sm-4 p-4 bg-dark fixed-top" style="height:100vh;">
+                  <ul class="navbar-nav ">
+                      <li class="nav-item border-bottom border-light ">
+                          <a class="nav-link text-white" style="font-size: 130%;" href="{% url 'viewbook' %}" > <i class="fas fa-book"></i> Sách</a> 
+                      </li>
+  
+                      <li class="nav-item border-bottom border-light">
+                          <a class="nav-link text-white" href="{% url 'viewmobilephone' %}" style="font-size: 130%;" ><i class="fas fa-mobile-alt"></i> Điện Thoại</a>                                                          
+                      </li>
+
+                      <li class="nav-item border-bottom border-light">
+                          <a class="nav-link text-white" href="{% url 'viewlaptop' %}" style="font-size: 130%;" ><i class="fas fa-laptop"></i> Laptop</a>
+                        
+                      </li>
+  
+                      <li class="nav-item border-bottom border-light">
+                          <a class="nav-link text-white" href="{% url 'viewclothes' %}"  style="font-size: 130%;" > <i class="fas fa-tshirt"></i> Quần Áo</a>
+                       
+                      </li>
+  
+                  </ul>
+              </div>
+              <!--Ket Thuc Menu Quan Ly-->
+  
+              <!--Main-->
+              <div class="tab-content col-12 col-sm-12 col-md-12 col-lg-9 offset-3 content-right ">
+                <div class="container">
+                  {% block book %}
+                  {% endblock %}
+                  {% block clothes %}
+                  {% endblock %}
+                  {% block laptop %}
+                  {% endblock %}
+                  {% block mobilephone %}
+                  {% endblock %}
+              </div>
+                </div>
+              <!--Ket Thuc Main-->
+              
+          </div>
+      </div>
+  
+  </div>
+    <div class="menu container">
+        
+    </div>
+
+  
+</body>
+
+</html>

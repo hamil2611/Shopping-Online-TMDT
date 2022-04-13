@@ -1,0 +1,64 @@
+{% extends 'pages/home.html' %}
+{% block book%}
+{% for item in dsbook %}
+<div class="col-md-3">
+    <div href="#" class="card card-product-grid">
+        <a href="#" class="img-wrap"> <img src="../../../Image/media/{{item.images}}"> </a>
+        <figcaption class="info-wrap">
+            <a href="#" class="title text-center"><strong>{{item.title}}</strong></a>
+            <div class="price mt-1 text-center">{{item.price}}</div> <!-- price-wrap.// -->
+            <span><a href="{% url 'add_to_cart'  item.book_id %}" class="btn btn-info btn-add-to-card text-center offset-1"><strong>Thêm vào giỏ hàng</strong> <i class="fas fa-shopping-cart"></i></a></span>
+            <span><a class="btn btn-outline-info btn-detail offset-3 mt-2" href="{% url 'product_detail_book' item.book_id%}">Xem Chi Tiết</a></span>
+        </figcaption>
+    </div>
+</div> <!-- col.// -->
+{% endfor %}
+{% endblock %}
+
+{% block laptop %}
+{% for item in dslaptop %}
+<div class="col-md-3">
+    <div href="#" class="card card-product-grid">
+        <a href="#" class="img-wrap"> <img src="../../../Image/media/{{item.images}}"> </a>
+        <figcaption class="info-wrap">
+            <a href="#" class="title text-center"><strong>{{item.name}}</strong></a>
+            <div class="price mt-1 text-center">{{item.price}}</div> <!-- price-wrap.// -->
+            <span><a href="#" class="btn btn-info btn-add-to-card text-center offset-1"><strong>Thêm vào giỏ hàng</strong> <i class="fas fa-shopping-cart"></i></a></span>
+            <span><a class="btn btn-outline-info btn-detail offset-3 mt-2" href="#">Xem Chi Tiết</a></span>
+        </figcaption>
+    </div>
+</div> <!-- col.// -->
+{% endfor %}
+{% endblock %}
+
+{% block mobilephone %}
+{% for item in dsmobile %}
+<div class="col-md-3">
+    <div href="#" class="card card-product-grid">
+        <a href="#" class="img-wrap"> <img src="../../../Image/media/{{item.images}}"> </a>
+        <figcaption class="info-wrap">
+            <a href="#" class="title text-center"><strong>{{item.name}}</strong></a>
+            <div class="price mt-1 text-center">{{item.price}}</div> <!-- price-wrap.// -->
+            <span><a href="#" class="btn btn-info btn-add-to-card text-center offset-1"><strong>Thêm vào giỏ hàng</strong> <i class="fas fa-shopping-cart"></i></a></span>
+            <span><a class="btn btn-outline-info btn-detail offset-3 mt-2" href="#">Xem Chi Tiết</a></span>
+        </figcaption>
+    </div>
+</div> <!-- col.// -->
+{% endfor %}
+{% endblock %}
+
+{% block clothes %}
+{% for item in dsclothes %}
+<div class="col-md-3">
+    <div href="#" class="card card-product-grid">
+        <a href="#" class="img-wrap"> <img src="../../../Image/media/{{item.images}}"> </a>
+        <figcaption class="info-wrap">
+            <a href="#" class="title text-center"><strong>{{item.name}}</strong></a>
+            <div class="price mt-1 text-center">{{item.price}}</div> <!-- price-wrap.// -->
+            <span><a href="#" class="btn btn-info btn-add-to-card text-center offset-1"><strong>Thêm vào giỏ hàng</strong> <i class="fas fa-shopping-cart"></i></a></span>
+            <span><a class="btn btn-outline-info btn-detail offset-3 mt-2" href="#">Xem Chi Tiết</a></span>
+        </figcaption>
+    </div>
+</div> <!-- col.// -->
+{% endfor %}
+{% endblock %}

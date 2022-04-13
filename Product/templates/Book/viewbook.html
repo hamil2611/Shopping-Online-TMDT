@@ -1,0 +1,35 @@
+{% extends 'Base/base.html' %}
+{% block book%}
+<h1 class="text-center text-info"><strong>DANH SÁCH SẢN PHẨM SÁCH</strong></h1>
+<table border="1"  class="table table-bordered ">
+    <tr>
+        <td class="text-info"><b>Mã Sách</b></td>
+        <td class="text-info"><b>Tên Sách</b></td>
+        <td class="text-info"><b>Năm xuất bản</b></td>
+        <td class="text-info"><b>Ngôn ngũ</b></td>
+        <td class="text-info"><b>Giá</b></td>
+        <td class="text-info"><b>Tác giả</b></td>
+        <td class="text-info"><b>Nhà xuất bản</b></td>
+        <td class="text-info"><b>Số lượng</b></td>
+        <td>Ảnh</td>
+        <td class="text-info"><b>Xóa</b></td>
+        <td class="text-info"><b>Sửa</b></td>
+    </tr>
+    {% for item in dsbook %}
+    <tr>
+        <td>{{item.book_id}}</td>
+        <td>{{item.title}}</td>
+        <td>{{item.summary}}</td>
+        <td>{{item.language}}</td>  
+        <td>{{item.price}}</td>
+        <td>{{item.author}}</td>
+        <td>{{item.publisher}}</td>
+        <td>{{item.quantity}}</td>
+        <td><img src="../../../Image/media/{{item.images}}" alt="" style="width: 80px; height: 80px;"></td>
+        <td><a href="{% url 'delete' item.book_id%}" class="text-danger"><i class="fas fa-trash-alt fa-2x"></a></td>
+        <td><a href="{% url 'delete' item.book_id%}" class="text-warning"><i class="fas fa-wrench fa-2x"></i></a></td>
+    </tr>
+    {% endfor %}
+</table>
+<a class="btn btn-info" href="{% url 'pageaddbook' %}">Thêm Sách</a>
+{% endblock %}
