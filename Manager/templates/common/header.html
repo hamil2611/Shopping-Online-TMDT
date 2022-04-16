@@ -35,7 +35,7 @@
               <a href="#" class="icon icon-sm rounded-circle border"
                 ><i class="fa fa-user"></i
               ></a>
-              {% if not user.username %}
+              {% if not username %}
               <div class="text">
                 <span class="text-muted">Welcome!</span>
                 <div>
@@ -47,7 +47,7 @@
               <div class="text">
                 <span class="text-muted">Welcome!</span>
                 <div>
-                  <a href="#">{{user.username}}</a> |
+                  <a href="#">{{request.session.get('username')}}}</a> |
                   <a href="{% url 'logout'%}">Đăng xuất</a>
                 </div>
               </div>

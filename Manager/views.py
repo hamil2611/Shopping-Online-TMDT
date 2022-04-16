@@ -49,11 +49,14 @@ def login(request):
             return render(request,"Base/base.html")
         else:
             u = User.objects.get(username=tk)
+            request.session['username'] = u.username
+            request.session.save()
+            username = request.session.get('username')
             list_book = Book.objects.all()[:4]
             list_laptop = Laptop.objects.all()[:4]
             list_mobile = Mobilephone.objects.all()[:4]
             list_clothes = Clothes.objects.all()[:4]
-            context = {"dsbook":list_book,"dslaptop":list_laptop,"dsmobile":list_mobile,"dsclothes":list_clothes,"user":u}
+            context = {"dsbook":list_book,"dslaptop":list_laptop,"dsmobile":list_mobile,"dsclothes":list_clothes,"user":u,"username":username}
             return render(request, "Base/customer_viewlistproduct.html",context)
     
 
