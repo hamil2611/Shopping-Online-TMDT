@@ -15,7 +15,7 @@ urlpatterns = [
     path('homepage/',views.login,name="checklogin"),
 
     #logout
-    path('logout/',views.logout,name="logout"),
+    path('logout/',views.handleLogout,name="logout"),
 
     #register
     path('register/',views.formregister,name="register"),
@@ -47,6 +47,6 @@ urlpatterns = [
     path('product_detail/<int:book_id>',views.product_detail_book,name="product_detail_book"),
 
     #Add_To_Cart
-    path('homepage/<int:book_id>',views.add_to_cart,name="add_to_cart"),
+    path('viewcart/<int:id>',views.add_to_cart,name="add_to_cart"),
     path('viewcart',views.view_cart,name="viewcart"),
 ]
