@@ -97,7 +97,7 @@
 						</div>
 						<!-- row.// -->
 
-						<span><a href="#" class="btn btn-info btn-add-to-card text-center">
+						<span><a href="{% url 'add_to_cart'  book.book_id %}" class="btn btn-info btn-add-to-card text-center">
 							<strong>Mua Ngay</strong></a></span>
 						<span><a href="{% url 'add_to_cart'  book.book_id %}" class="btn btn-info btn-add-to-card text-center">
 							<strong>Thêm vào giỏ hàng</strong> <i class="fas fa-shopping-cart"></i></a></span>
@@ -108,26 +108,6 @@
 			</div>
 			<!-- row.// -->
 		</div>
-		<!-- card.// -->
-		<!-- ============================ COMPONENT 1 END .// ================================= -->
-
-		<br /><br /><br /><br />
-		<!-- ========================= FOOTER ========================= -->
-		<footer class="section-footer border-top padding-y">
-			<div class="container">
-				<p class="float-left text-muted">
-					Designed by <a href="http://pixsellz.io">Pixsellz</a> <br />
-					Developed by
-					<a target="_blank" href="http://behance.net/vosidiy">Vosidiy Muslimbek</a>
-				</p>
-				<p target="_blank" class="float-right text-muted">
-					Copyright &copy 2019 <br />
-					<a href="http://bootstrap-ecommerce.com">Bootstrap-ecommerce UI kit</a>
-				</p>
-			</div>
-			<!-- //container -->
-		</footer>
-		<!-- ========================= FOOTER END // ========================= -->
 	</div>
 </section>
 

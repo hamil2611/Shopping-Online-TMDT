@@ -4,7 +4,11 @@
       <div class="row align-items-center">
         <div class="col-lg-2 col-4">
           <div class="brand-wrap">
-            <a href="{% url 'index' %}"><strong class="text-info" style="font-size: 170%;">Trang Chủ</strong></a>
+            <a href="{% url 'index' %}"
+              ><strong class="text-info" style="font-size: 170%"
+                >Trang Chủ</strong
+              ></a
+            >
           </div>
           <!-- brand-wrap.// -->
         </div>
@@ -25,7 +29,9 @@
         <div class="col-lg-4 col-sm-6 col-8">
           <div class="widgets-wrap float-md-right">
             <div class="widget-header mr-3">
-              <a href="{% url 'viewcart'%}" class="icon icon-sm rounded-circle border"
+              <a
+                href="{% url 'viewcart'%}"
+                class="icon icon-sm rounded-circle border"
                 ><i class="fa fa-shopping-cart"></i
               ></a>
               <span class="badge badge-pill badge-danger notify">0</span>
@@ -35,7 +41,15 @@
               <a href="#" class="icon icon-sm rounded-circle border"
                 ><i class="fa fa-user"></i
               ></a>
-              {% if not username %}
+              {% if username %}
+              <div class="text">
+                <span class="text-muted">Welcome!</span>
+                <div>
+                  <a href="#">{{ username }}</a> |
+                  <a href="{% url 'logout'%}">Đăng xuất</a>
+                </div>
+              </div>
+              {% else %}
               <div class="text">
                 <span class="text-muted">Welcome!</span>
                 <div>
@@ -43,17 +57,8 @@
                   <a href="{% url 'register'%}">Đăng ký</a>
                 </div>
               </div>
-              {% else %}
-              <div class="text">
-                <span class="text-muted">Welcome!</span>
-                <div>
-                  <a href="#">{{request.session.get('username')}}}</a> |
-                  <a href="{% url 'logout'%}">Đăng xuất</a>
-                </div>
-              </div>
               {% endif %}
             </div>
-            
           </div>
           <!-- widgets-wrap.// -->
         </div>
