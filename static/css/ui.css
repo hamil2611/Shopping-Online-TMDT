@@ -1381,3 +1381,9 @@ a[class*='card']:hover .title {
 }
 
 /*# sourceMappingURL=ui.css.map */
+
+.text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

@@ -97,9 +97,9 @@
 						</div>
 						<!-- row.// -->
 
-						<span><a href="{% url 'add_to_cart'  book.book_id %}" class="btn btn-info btn-add-to-card text-center">
+						<span><a href="{% url 'add_to_cart' book.book_id 1 book.category_id.category_id %}" class="btn btn-info btn-add-to-card text-center">
 							<strong>Mua Ngay</strong></a></span>
-						<span><a href="{% url 'add_to_cart'  book.book_id %}" class="btn btn-info btn-add-to-card text-center">
+						<span><a href="{% url 'add_to_cart' book.book_id 1 book.category_id.category_id %}" class="btn btn-info btn-add-to-card text-center">
 							<strong>Thêm vào giỏ hàng</strong> <i class="fas fa-shopping-cart"></i></a></span>
 					</article>
 					<!-- product-info-aside .// -->

@@ -44,9 +44,9 @@ urlpatterns = [
     path('pageaddclothes/',clothesDAO.pageaddclothes,name="pageaddclothes"),
     path('saveclothes/', clothesDAO.saveclothes, name="saveclothes"),
     #Product_detail
-    path('product_detail/<int:book_id>',views.product_detail_book,name="product_detail_book"),
+    path('product_detail/id=<int:book_id>',views.product_detail_book,name="product_detail_book"),
 
     #Add_To_Cart
-    path('viewcart/<int:id>',views.add_to_cart,name="add_to_cart"),
+    path('viewcart/id=<int:id>/quantity=<int:quantity>/category=<int:category>',views.add_to_cart,name="add_to_cart"),
     path('viewcart',views.view_cart,name="viewcart"),
 ]
