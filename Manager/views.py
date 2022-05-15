@@ -1,11 +1,14 @@
+from audioop import add
 from multiprocessing import context
 from re import T
+from unicodedata import category
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-
+from django.shortcuts import redirect, HttpResponseRedirect
 from Cart.models import Cart
-from .models import User
+from .models import User, Comment
 from django.contrib.auth import authenticate, decorators, logout
 from Product.models import Book, Laptop, Mobilephone, Clothes
 # Create your views here.
@@ -55,8 +58,8 @@ def login(request):
 
     if user is None:
         return render(request, "pages/login.html")
-    # else if user.is_superuser:
-    #     return render(request, "pages/login.html")
+    elif user.is_superuser:
+        return render(request, "Base/base.html")
     else:
         request.session['username'] = tk
         list_book = Book.objects.all()[:4]
@@ -81,7 +84,15 @@ def customer_listproduct(request):
 def product_detail_book(request, book_id):
     username = request.session.get('username')
     book = Book.objects.get(pk=book_id)
-    context = {"book": book, "username": username}
+    cate_id = book.category_id.category_id
+    name = request.session.get('username')
+    comment = Comment.objects.filter(product_id=book_id,category_id=cate_id).order_by('-id')[:4]
+    context = {"book": book, "username": username,"comment":comment,"name":name}
+    if request.method == 'POST':
+        content = request.POST["content"]
+        c = Comment.objects.create(content=content,product_id=book_id,user=name,category_id = cate_id)
+        c.save()
+        return HttpResponseRedirect(request.path)
     return render(request, "Book/product_detail_book.html", context)
 
 # login_phanquyen
@@ -116,8 +127,9 @@ def add_to_cart(request, id, quantity, category):
             cartItem = Cart.objects.create(
                 quantity=quantity, product_id=id, category_id=category, customer=customer)
             cartItem.save()
-
+           
         context = getCart(username)
+     
         return render(request, "Cart/cart.html", context)
 
 # Common
@@ -204,3 +216,16 @@ def getTotalPrice(list):
     for item in list:
         total += item['totalPrice']
     return total
+
+@decorators.login_required(login_url='/login/')
+
+def addcomment(request,book_id):
+    
+    content = request.POST["content"]
+    name = request.session.get('username')
+    print(content)
+    print(book_id)
+    print(name)
+    c = Comment.objects.create(content=content,product_id=book_id,user=name)
+    c.save()
+    return render(request, "pages/login.html")

@@ -9,4 +9,9 @@ class User(AbstractUser):
     sex = models.IntegerField(choices=sex_choice,default=0)
     address = models.CharField(max_length=100, default='')
     phonenumber = models.CharField(max_length=15, default='')
-    
+class Comment(models.Model):
+    content = models.CharField(max_length=200,default=None)
+    date = models.DateTimeField(auto_now_add=True)
+    product_id = models.IntegerField(default=0)
+    category_id = models.IntegerField(default=0)
+    user = models.CharField(max_length=100,default=None)
