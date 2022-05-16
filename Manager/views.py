@@ -1,6 +1,7 @@
 from audioop import add
 from multiprocessing import context
-from re import T
+
+
 from unicodedata import category
 
 from django.shortcuts import render
@@ -28,6 +29,7 @@ def formregister(request):
 
 def adduser(request):
     username = request.POST.get("username", False)
+    firstname = request.POST.get("firstname", False)
     email = request.POST.get("email", False)
     password = request.POST.get("password", False)
     address = request.POST.get("address", False)
@@ -39,7 +41,7 @@ def adduser(request):
         context = {"msg": msg}
         return render(request, "pages/register.html", context)
     except User.DoesNotExist:
-        u = User.objects.create_user(
+        u = User.objects.create_user(first_name=firstname,
             email=email, username=username, password=password, address=address, phonenumber=phonenumber)
         u.save()
         return render(request, "pages/login.html")
@@ -62,35 +64,40 @@ def login(request):
         return render(request, "Base/base.html")
     else:
         request.session['username'] = tk
+        first = getFirstname(request)
         list_book = Book.objects.all()[:4]
         list_laptop = Laptop.objects.all()[:4]
         list_mobile = Mobilephone.objects.all()[:4]
         list_clothes = Clothes.objects.all()[:4]
         context = {"dsbook": list_book, "dslaptop": list_laptop,
-                   "dsmobile": list_mobile, "dsclothes": list_clothes, "username": tk}
+                   "dsmobile": list_mobile, "dsclothes": list_clothes, "username": first}
         return render(request, "Base/customer_viewlistproduct.html", context)
 
 
 # showlist_product_customer
 def customer_listproduct(request):
-    username = request.session.get('username')
+    
     context = getListItem()
-    context['username'] = username
+    username = request.session.get('username')
+    if username:
+        context['username'] = getFirstname(request)
     return render(request, "Base/customer_viewlistproduct.html", context)
 
 # product_detail
 
 
-def product_detail_book(request, book_id):
+def product_detail_book(request, id):
     username = request.session.get('username')
-    book = Book.objects.get(pk=book_id)
+    if username:
+        username = getFirstname(request)
+    book = Book.objects.get(pk=id)
     cate_id = book.category_id.category_id
     name = request.session.get('username')
-    comment = Comment.objects.filter(product_id=book_id,category_id=cate_id).order_by('-id')[:4]
+    comment = Comment.objects.filter(product_id=id,category_id=cate_id).order_by('-id')[:4]
     context = {"book": book, "username": username,"comment":comment,"name":name}
     if request.method == 'POST':
         content = request.POST["content"]
-        c = Comment.objects.create(content=content,product_id=book_id,user=name,category_id = cate_id)
+        c = Comment.objects.create(content=content,product_id=id,user=name,category_id = cate_id)
         c.save()
         return HttpResponseRedirect(request.path)
     return render(request, "Book/product_detail_book.html", context)
@@ -101,10 +108,11 @@ def product_detail_book(request, book_id):
 
 def view_cart(request):
     username = request.session.get('username')
+    
     if not username:
         return render(request, "pages/login.html")
     else:
-        context = getCart(username)
+        context = getCart(username,request)
         return render(request, "Cart/cart.html", context)
 
 # @decorators.login_required(login_url='/login/')
@@ -128,7 +136,7 @@ def add_to_cart(request, id, quantity, category):
                 quantity=quantity, product_id=id, category_id=category, customer=customer)
             cartItem.save()
            
-        context = getCart(username)
+        context = getCart(username,request)
      
         return render(request, "Cart/cart.html", context)
 
@@ -145,7 +153,7 @@ def getListItem():
     return context
 
 
-def getCart(username):
+def getCart(username,request):
     customer = User.objects.get(username=username)
     list = Cart.objects.all().filter(customer=customer)
 
@@ -165,7 +173,7 @@ def getCart(username):
 
     context = {'listBook': listBook,
                'listLaptop': listLaptop, 'listClothes': listClothes, 'listMobilePhone': listMobilePhone, 'totalPrice': totalPrice}
-    context['username'] = username
+    context['username'] = getFirstname(request)
 
     return context
 
@@ -217,6 +225,11 @@ def getTotalPrice(list):
         total += item['totalPrice']
     return total
 
+def getFirstname(request):
+    username = request.session.get('username')
+    firstname = User.objects.get(username=username)
+    
+    return firstname
 @decorators.login_required(login_url='/login/')
 
 def addcomment(request,book_id):

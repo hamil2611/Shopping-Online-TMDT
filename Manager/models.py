@@ -5,10 +5,13 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
+    first_name = models.CharField(max_length = 100,default=None)
     sex_choice =  ((0,"Nữ"), (1,"Nam"))
     sex = models.IntegerField(choices=sex_choice,default=0)
     address = models.CharField(max_length=100, default='')
     phonenumber = models.CharField(max_length=15, default='')
+    def __str__(self):
+        return self.get_short_name()
 class Comment(models.Model):
     content = models.CharField(max_length=200,default=None)
     date = models.DateTimeField(auto_now_add=True)
