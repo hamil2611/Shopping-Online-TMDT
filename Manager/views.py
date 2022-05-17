@@ -1,9 +1,6 @@
 from audioop import add
 from multiprocessing import context
-
-
 from unicodedata import category
-
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -15,18 +12,14 @@ from Product.models import Book, Laptop, Mobilephone, Clothes
 from django.shortcuts import get_object_or_404
 # Create your views here.
 
-
 def handleLogout(request):
     logout(request)
     context = getListItem()
     return render(request, "Base/customer_viewlistproduct.html", context)
 
 # register
-
-
 def formregister(request):
     return render(request, "pages/register.html")
-
 
 def adduser(request):
     username = request.POST.get("username", False)
@@ -35,7 +28,6 @@ def adduser(request):
     password = request.POST.get("password", False)
     address = request.POST.get("address", False)
     phonenumber = request.POST.get("phone", False)
-
     try:
         user = User.objects.get(username=username)
         msg = "Tài khoản đã tồn tại!"
@@ -48,17 +40,13 @@ def adduser(request):
         return render(request, "pages/login.html")
 
 # login
-
-
 def formlogin(request):
     return render(request, "pages/login.html")
-
 
 def login(request):
     tk = request.POST.get('username')
     mk = request.POST.get('password')
     user = authenticate(username=tk, password=mk)
-
     if user is None:
         return render(request, "pages/login.html")
     elif user.is_superuser:
@@ -74,7 +62,6 @@ def login(request):
                    "dsmobile": list_mobile, "dsclothes": list_clothes, "username": first}
         return render(request, "Base/customer_viewlistproduct.html", context)
 
-
 # showlist_product_customer
 def customer_listproduct(request):
     
@@ -85,8 +72,6 @@ def customer_listproduct(request):
     return render(request, "Base/customer_viewlistproduct.html", context)
 
 # product_detail
-
-
 def product_detail_book(request, id):
     username = request.session.get('username')
     if username:
@@ -150,7 +135,7 @@ def product_detail_clothes(request, id):
         c.save()
         return HttpResponseRedirect(request.path)
     return render(request, "Clothes/product_detail_clothes.html", context)    
-# login_phanquyen
+
 # @decorators.login_required(login_url='/login/')
 
 
@@ -164,8 +149,6 @@ def view_cart(request):
         return render(request, "Cart/cart.html", context)
 
 # @decorators.login_required(login_url='/login/')
-
-
 def add_to_cart(request, id, quantity, category):
     username = request.session.get('username')
     context = getCart(username,request)
@@ -189,8 +172,6 @@ def add_to_cart(request, id, quantity, category):
     #return render(request, "Cart/cart.html", context)
 
 # Common
-
-
 def getListItem():
     list_book = Book.objects.all()[:4]
     list_laptop = Laptop.objects.all()[:4]
@@ -209,20 +190,16 @@ def getCart(username,request):
     listLaptop = []
     listClothes = []
     listMobilePhone = []
-
     for item in list:
         if getCartItemBook(item): listBook.append(getCartItemBook(item))
         if getCartItemLaptop(item): listLaptop.append(getCartItemLaptop(item))
         if getCartItemClothes(item): listClothes.append(getCartItemClothes(item))
         if getCartItemMobilePhone(item):
             listMobilePhone.append(getCartItemMobilePhone(item))
-
     totalPrice = getTotalPrice(listBook)
-
     context = {'listBook': listBook,
                'listLaptop': listLaptop, 'listClothes': listClothes, 'listMobilePhone': listMobilePhone, 'totalPrice': totalPrice}
     context['username'] = getFirstname(request)
-
     return context
 
 
@@ -280,14 +257,3 @@ def getFirstname(request):
     
     return firstname
 
-@decorators.login_required(login_url='/login/')
-def addcomment(request,book_id):
-    
-    content = request.POST["content"]
-    name = request.session.get('username')
-    print(content)
-    print(book_id)
-    print(name)
-    c = Comment.objects.create(content=content,product_id=book_id,user=name)
-    c.save()
-    return render(request, "pages/login.html")

@@ -44,15 +44,16 @@ urlpatterns = [
     path('viewclothes/',clothesDAO.listcolothes,name="viewclothes"),
     path('pageaddclothes/',clothesDAO.pageaddclothes,name="pageaddclothes"),
     path('saveclothes/', clothesDAO.saveclothes, name="saveclothes"),
+
     #Product_detail
     path('product_detail_book/id=<int:id>',views.product_detail_book,name="product_detail_book"),
     path('product_detail_laptop/id=<int:id>',views.product_detail_laptop,name="product_detail_laptop"),
     path('product_detail_clothes/id=<int:id>',views.product_detail_clothes,name="product_detail_clothes"),
     path('product_detail_mobile/id=<int:id>',views.product_detail_mobile,name="product_detail_mobile"),
+
     #Add_To_Cart
     path('viewcart/id=<int:id>/quantity=<int:quantity>/category=<int:category>',views.add_to_cart,name="add_to_cart"),
     path('viewcart/',views.view_cart,name="viewcart"),
 
-    #Addcoment
-    path('product_detail/id=<int:book_id>',views.addcomment,name="addcomment"),
+
 ]
