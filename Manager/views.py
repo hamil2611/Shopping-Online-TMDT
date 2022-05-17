@@ -185,9 +185,8 @@ def getCartItemBook(item):
         bookItem = {'book': book, 'totalPrice': book.price *
                     item.quantity, 'quantity': item.quantity}
         return bookItem
-    except Laptop.DoesNotExist:
+    except Book.DoesNotExist:
         return 
-
 
 def getCartItemLaptop(item):
     try:
