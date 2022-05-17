@@ -103,6 +103,53 @@ def product_detail_book(request, id):
         return HttpResponseRedirect(request.path)
     return render(request, "Book/product_detail_book.html", context)
 
+def product_detail_laptop(request, id):
+    username = request.session.get('username')
+    if username:
+        username = getFirstname(request)
+    laptop = Laptop.objects.get(pk=id)
+    cate_id = laptop.category_id.category_id
+    name = request.session.get('username')
+    comment = Comment.objects.filter(product_id=id,category_id=cate_id).order_by('-id')[:4]
+    context = {"laptop": laptop, "username": username,"comment":comment,"name":name}
+    if request.method == 'POST':
+        content = request.POST["content"]
+        c = Comment.objects.create(content=content,product_id=id,user=name,category_id = cate_id)
+        c.save()
+        return HttpResponseRedirect(request.path)
+    return render(request, "Laptop/product_detail_laptop.html", context)
+
+def product_detail_mobile(request, id):
+    username = request.session.get('username')
+    if username:
+        username = getFirstname(request)
+    mobile = Mobilephone.objects.get(pk=id)
+    cate_id = mobile.category_id.category_id
+    name = request.session.get('username')
+    comment = Comment.objects.filter(product_id=id,category_id=cate_id).order_by('-id')[:4]
+    context = {"mobile": mobile, "username": username,"comment":comment,"name":name}
+    if request.method == 'POST':
+        content = request.POST["content"]
+        c = Comment.objects.create(content=content,product_id=id,user=name,category_id = cate_id)
+        c.save()
+        return HttpResponseRedirect(request.path)
+    return render(request, "Mobilephone/product_detail_mobile.html", context)
+
+def product_detail_clothes(request, id):
+    username = request.session.get('username')
+    if username:
+        username = getFirstname(request)
+    clothes = Clothes.objects.get(pk=id)
+    cate_id = clothes.category_id.category_id
+    name = request.session.get('username')
+    comment = Comment.objects.filter(product_id=id,category_id=cate_id).order_by('-id')[:4]
+    context = {"clothes": clothes, "username": username,"comment":comment,"name":name}
+    if request.method == 'POST':
+        content = request.POST["content"]
+        c = Comment.objects.create(content=content,product_id=id,user=name,category_id = cate_id)
+        c.save()
+        return HttpResponseRedirect(request.path)
+    return render(request, "Clothes/product_detail_clothes.html", context)    
 # login_phanquyen
 # @decorators.login_required(login_url='/login/')
 
@@ -121,7 +168,7 @@ def view_cart(request):
 
 def add_to_cart(request, id, quantity, category):
     username = request.session.get('username')
-
+    context = getCart(username,request)
     if not username:
         return render(request, "pages/login.html")
     else:
@@ -132,14 +179,14 @@ def add_to_cart(request, id, quantity, category):
             newQuantity = oldCartItem.quantity + quantity
             Cart.objects.filter(customer=customer, product_id=id,
                                 category_id=category).update(quantity=newQuantity)
+            return HttpResponseRedirect("/home/")
         else:
             cartItem = Cart.objects.create(
                 quantity=quantity, product_id=id, category_id=category, customer=customer)
             cartItem.save()
-           
-        context = getCart(username,request)
-     
-        return render(request, "Cart/cart.html", context)
+            return HttpResponseRedirect("/home/")
+        
+    #return render(request, "Cart/cart.html", context)
 
 # Common
 
@@ -232,8 +279,8 @@ def getFirstname(request):
     firstname = User.objects.get(username=username)
     
     return firstname
-@decorators.login_required(login_url='/login/')
 
+@decorators.login_required(login_url='/login/')
 def addcomment(request,book_id):
     
     content = request.POST["content"]

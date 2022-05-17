@@ -15,12 +15,7 @@ def listbook(request):
 def listbook_customer(request):
     list_book = Book.objects.all()
     context = {"dsbook":list_book}
-    return render(request, "Book/customer_viewbook.html",context)
-
-def customer_listbook(request):
-    list_book = Book.objects.all()[:4]
-    context = {"dsbook":list_book}
-    return render(request, "Book/customer_viewbook.html",context)
+    return render(request, "Book/see_all_book.html",context)
 
 def savebook(request):
     category = Category.objects.get(product_type='Sách')

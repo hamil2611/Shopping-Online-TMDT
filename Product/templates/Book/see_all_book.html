@@ -1,11 +1,11 @@
 {% extends 'common/base.html' %}
 {% block seeallbook%}
 {% for item in dsbook %}
-<div class="col-md-3">
+<div class="col-md-3 container">
     <div href="#" class="card card-product-grid">
         <a href="#" class="img-wrap"> <img src="../../../Image/media/{{item.images}}"> </a>
         <figcaption class="info-wrap">
-            <a href="#" class="title text-center"><strong>{{item.title}}</strong></a>
+            <a href="#" class="title text-center"><h6 class="text-ellipsis">{{item.title}}</h6></a>
             <div class="price mt-1 text-center">{{item.price}}</div> <!-- price-wrap.// -->
             <span><a href="{% url 'add_to_cart' item.book_id 1 item.category_id.category_id}" class="btn btn-info btn-add-to-card text-center offset-1"><strong>Thêm vào giỏ hàng</strong> <i class="fas fa-shopping-cart"></i></a></span>
             <span><a class="btn btn-outline-info btn-detail offset-3 mt-2" href="{% url 'product_detail_book' item.book_id%}">Xem Chi Tiết</a></span>

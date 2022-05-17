@@ -1,0 +1,143 @@
+{% extends 'common/base.html' %} 
+{% block content %}
+<section class="section-content padding-y bg">
+	<div class="container">
+		<div class="card">
+			<div class="row no-gutters">
+				<aside class="col-md-6">
+					<article class="gallery-wrap">
+						<div class="img-big-wrap">
+							<div>
+								<a href="#"><img src="../../../Image/media/{{laptop.images}}" /></a>
+							</div>
+						</div>
+						<!-- slider-product.// -->
+						<!-- <div class="thumbs-wrap">
+							<a href="#" class="item-thumb">
+								<img src="./images/items/1.jpg" /></a>
+							<a href="#" class="item-thumb">
+								<img src="./images/items/2.jpg" /></a>
+							<a href="#" class="item-thumb">
+								<img src="./images/items/3.jpg" /></a>
+							<a href="#" class="item-thumb">
+								<img src="./images/items/4.jpg" /></a>
+						</div> -->
+						<!-- slider-nav.// -->
+					</article>
+					<!-- gallery-wrap .end// -->
+				</aside>
+				<main class="col-md-6 border-left">
+					<article class="content-body">
+						<h2 class="title">{{laptop.name}}</h2>
+
+						<div class="rating-wrap my-3">
+							<ul class="rating-stars">
+								<li style="width: 80%" class="stars-active">
+									<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+									<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</li>
+								<li>
+									<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+									<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</li>
+							</ul>
+							<small class="label-rating text-muted">132 reviews</small>
+							<small class="label-rating text-success">
+								<i class="fa fa-clipboard-check"></i> 154 orders
+							</small>
+						</div>
+						<!-- rating-wrap.// -->
+
+						<div class="mb-3">
+							<var class="price h4">{{laptop.price}} VNĐ</var>
+							<span class="text-muted"></span>
+						</div>
+						<!-- price-detail-wrap .// -->
+						<h4><strong>Mô tả</strong></h4>
+						<p>{{laptop.description}}</p>
+
+						<dl class="row">
+							<dt class="col-sm-5"><strong>Hãng sản xuất:</strong></dt>
+							<dd class="col-sm-7">{{laptop.brand}}</dd>
+
+							<dt class="col-sm-5"><strong>Kích thước màn hình:</strong></dt>
+							<dd class="col-sm-7">{{laptop.screensize}}</dd>
+
+							<dt class="col-sm-5"><strong>Kiểu máy:</strong></dt>
+							<dd class="col-sm-7">{{laptop.model}}</dd>
+
+							<dt class="col-sm-5"><strong>Sản phẩm:</strong></dt>
+							<dd class="col-sm-7">{{laptop.category_id}}</dd>
+						</dl>
+
+						<hr />
+						<div class="form-row">
+							<!-- <div class="form-group col-md flex-grow-0">
+								<label>Quantity</label>
+								<div class="input-group mb-3 input-spinner">
+									<div class="input-group-prepend">
+										<button class="btn btn-light" type="button" id="button-plus">
+											+
+										</button>
+									</div>
+									<input type="text" class="form-control" value="1" />
+									<div class="input-group-append">
+										<button class="btn btn-light" type="button" id="button-minus">
+											&minus;
+										</button>
+									</div>
+								</div>
+							</div> -->
+							<!-- col.// -->
+							
+							<!-- col.// -->
+						</div>
+						<!-- row.// -->
+
+						<span><a href="{% url 'add_to_cart' laptop.laptop_id 1 laptop.category_id.category_id %}" class="btn btn-info btn-add-to-card text-center">
+							<strong>Mua Ngay</strong></a></span>
+						<span><a href="{% url 'add_to_cart' laptop.laptop_id 1 laptop.category_id.category_id %}" class="btn btn-info btn-add-to-card text-center">
+							<strong>Thêm vào giỏ hàng</strong> <i class="fas fa-shopping-cart"></i></a></span>
+					</article>
+					<!-- product-info-aside .// -->
+				</main>
+				<!-- col.// -->
+			</div>
+			<!-- row.// -->
+		</div>
+	</div>
+	<div class="conatier ">
+	
+			<div class="row no-gutters col-12">
+				<div class="offset-1"  >
+					<h2>Bình luận về sản phẩm</h2>
+					{% if name %}
+					<form action="{% url 'product_detail_laptop' laptop.laptop_id %}" method="POST">
+						{% csrf_token %}
+						<p>Bình Luân:</p>
+						<textarea name="content" id="" cols="100" rows="3"></textarea>
+						<button type="submit" class="btn btn-primary btn-block col-2">
+						Bình luận
+						</button>
+					</form>
+					{% endif %}
+					<div class="container fluid">
+						{% for item in comment %}
+					<div>
+						<p><strong>Người dùng:</strong> {{item.user}}</p>
+						<p><strong>Ngày:</strong> {{item.date}}</p>
+						<textarea name="" id="" cols="100" rows="3">{{item.content}}</textarea>
+					</div>
+					{% endfor %}
+					</div>
+					
+				</div>
+				<!-- col.// -->
+			</div>
+			<!-- row.// -->
+	</div>
+</section>
+
+{% endblock %}
