@@ -12,6 +12,7 @@ from Cart.models import Cart
 from .models import User, Comment
 from django.contrib.auth import authenticate, decorators, logout
 from Product.models import Book, Laptop, Mobilephone, Clothes
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 
@@ -179,11 +180,13 @@ def getCart(username,request):
 
 
 def getCartItemBook(item):
-    book = Book.objects.get(
-        book_id=item.product_id, category_id=item.category_id)
-    bookItem = {'book': book, 'totalPrice': book.price *
-                item.quantity, 'quantity': item.quantity}
-    return bookItem
+    try:
+        book = Book.objects.get(book_id=item.product_id, category_id=item.category_id)
+        bookItem = {'book': book, 'totalPrice': book.price *
+                    item.quantity, 'quantity': item.quantity}
+        return bookItem
+    except Laptop.DoesNotExist:
+        return 
 
 
 def getCartItemLaptop(item):
