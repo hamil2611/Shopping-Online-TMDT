@@ -257,3 +257,21 @@ def getFirstname(request):
     
     return firstname
 
+@decorators.login_required(login_url='/login/')
+def addcomment(request,book_id):
+    
+    content = request.POST["content"]
+    name = request.session.get('username')
+    print(content)
+    print(book_id)
+    print(name)
+    c = Comment.objects.create(content=content,product_id=book_id,user=name)
+    c.save()
+    return render(request, "pages/login.html")
+
+def view_checkout(request):
+    return render(request, "pages/checkout.html")
+
+
+def view_order(request):
+    return render(request, "pages/view-order.html")

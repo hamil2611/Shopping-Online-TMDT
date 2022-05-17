@@ -55,5 +55,13 @@ urlpatterns = [
     path('viewcart/id=<int:id>/quantity=<int:quantity>/category=<int:category>',views.add_to_cart,name="add_to_cart"),
     path('viewcart/',views.view_cart,name="viewcart"),
 
+    #Addcoment
+    path('product_detail/id=<int:book_id>',views.addcomment,name="addcomment"),
+
+    #Checkout
+    path('checkout/', views.view_checkout, name="checkout"),
+
+    #View order
+    path('view-order/', views.view_order, name="view-order"),
 
 ]
