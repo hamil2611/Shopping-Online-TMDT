@@ -55,4 +55,11 @@ urlpatterns = [
 
     #Addcoment
     path('product_detail/id=<int:book_id>',views.addcomment,name="addcomment"),
+
+    #Checkout
+    path('checkout/', views.view_checkout, name="checkout"),
+
+    #View order
+    path('view-order/', views.view_order, name="view-order"),
+
 ]

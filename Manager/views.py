@@ -291,3 +291,10 @@ def addcomment(request,book_id):
     c = Comment.objects.create(content=content,product_id=book_id,user=name)
     c.save()
     return render(request, "pages/login.html")
+
+def view_checkout(request):
+    return render(request, "pages/checkout.html")
+
+
+def view_order(request):
+    return render(request, "pages/view-order.html")
