@@ -6,109 +6,175 @@
   </div>
 </section>
 <!-- ========================= SECTION INTRO END// ========================= -->
+<div class="row">
+  <div class="card col-8 offset-2">
+    <table class="table table-borderless table-shopping-cart">
+      <thead class="text-muted">
+        <tr class="small text-uppercase">
+          <th scope="col">Product</th>
+          <th scope="col" width="120">Quantity</th>
+          <th scope="col" width="120">Price</th>
+          <th scope="col" class="text-right" width="200"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- ========================= BOOK ========================= -->
+        {% for item in listBook %}
+        <tr>
+          <td>
+            <figure class="itemside">
+              <div class="aside">
+                <img src="../../../Image/media/{{item.book.images}}" class="img-sm" />
+              </div>
+              <figcaption class="info">
+                <a href="#" class="title text-dark">{{item.book.title}}</a>
+                <p class="text-muted small">
+                  Size: XL, Color: blue, <br />
+                  Brand: Gucci
+                </p>
+              </figcaption>
+            </figure>
+          </td>
+          <td>
+            <p class="ml-4">{{item.quantity}}</p>
+          </td>
+          <td>
+            <div class="price-wrap">
+              <var class="price">{{item.totalPrice}}</var>
+              <small class="text-muted"> {{item.book.price}} each </small>
+            </div>
+          </td>
 
+        </tr>
+        {% endfor %}
+
+        <!-- ========================= LAPTOP ========================= -->
+        {% for item in listLaptop %}
+        <tr>
+          <td>
+            <figure class="itemside">
+              <div class="aside">
+                <img src="../../../Image/media/{{item.laptop.images}}" class="img-sm" />
+              </div>
+              <figcaption class="info">
+                <a href="#" class="title text-dark">{{item.laptop.name}}</a>
+                <p class="text-muted small">
+                  Size: XL, Color: blue, <br />
+                  Brand: Gucci
+                </p>
+              </figcaption>
+            </figure>
+          </td>
+          <td>
+            <p class="ml-4">{{item.quantity}}</p>
+          </td>
+          <td>
+            <div class="price-wrap">
+              <var class="price">{{item.totalPrice}}</var>
+              <small class="text-muted"> {{item.laptop.price}} each </small>
+            </div>
+          </td>
+
+        </tr>
+        {% endfor %}
+
+        <!-- ========================= Clothes ========================= -->
+        {% for item in listClothes %}
+        <tr>
+          <td>
+            <figure class="itemside">
+              <div class="aside">
+                <img src="../../../Image/media/{{item.clothes.images}}" class="img-sm" />
+              </div>
+              <figcaption class="info">
+                <a href="#" class="title text-dark">{{item.clothes.name}}</a>
+                <p class="text-muted small">
+                  Size: XL, Color: blue, <br />
+                  Brand: Gucci
+                </p>
+              </figcaption>
+            </figure>
+          </td>
+          <td>
+            <p class="ml-4">{{item.quantity}}</p>
+          </td>
+          <td>
+            <div class="price-wrap">
+              <var class="price">{{item.totalPrice}}</var>
+              <small class="text-muted"> {{item.clothes.price}} each </small>
+            </div>
+          </td>
+
+        </tr>
+        {% endfor %}
+
+        <!-- ========================= MOBILE ========================= -->
+        {% for item in listMobilePhone %}
+        <tr>
+          <td>
+            <figure class="itemside">
+              <div class="aside">
+                <img src="../../../Image/media/{{item.phone.images}}" class="img-sm" />
+              </div>
+              <figcaption class="info">
+                <a href="#" class="title text-dark">{{item.phone.name}}</a>
+                <p class="text-muted small">
+                  Size: XL, Color: blue, <br />
+                  Brand: Gucci
+                </p>
+              </figcaption>
+            </figure>
+          </td>
+          <td>
+            <p class="ml-4">{{item.quantity}}</p>
+          </td>
+          <td>
+            <div class="price-wrap">
+              <var class="price">{{item.totalPrice}}</var>
+              <small class="text-muted"> {{item.phone.price}} each </small>
+            </div>
+          </td>
+
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  
+  </div>
+  <div class="card col-8 offset-2">
+    <h4><strong>Tổng giá tiền:{{totalPrice}}</strong></h4>
+  </div>
+</div>
 <!-- ========================= SECTION CONTENT ========================= -->
 <section class="section-content padding-y">
   <div class="container">
     <div class="row justify-content-between">
-      <main class="col-md-6">
-        <div class="card mb-4">
-          <div class="card-body">
-            <h4 class="card-title mb-4">Shipment</h4>
-            <div class="form-group">
-              <label for="username">Số nhà / Ngõ / Ngách ...</label>
-              <input
-                type="text"
-                class="form-control"
-                name="houseNumber"
-                required=""
-              />
-            </div>
-            <div class="form-group">
-              <label for="username">Phường / Quận</label>
-              <input
-                type="text"
-                class="form-control"
-                name="district"
-                required=""
-              />
-            </div>
-            <div class="form-group">
-              <label for="username">Thành phố</label>
-              <input type="text" class="form-control" name="city" required="" />
-            </div>
-            <div class="form-group">
-              <label><span class="hidden-xs">Đơn vị vận chuyển</span> </label>
-              <div class="form-inline" style="min-width: 220px">
-                <select class="form-control" style="width: 100%">
-                  <option>Giao hàng nhanh - 25.000 đ</option>
-                  <option>Giao hàng tiết kiệm - 30.000 đ</option>
-                  <option>J&T Express - 27.000 đ</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-
       <main class="col-md-6" style="min-height: 500px">
         <div class="card mb-4">
           <div class="card-body">
-            <h4 class="card-title mb-4">Payment</h4>
+            <h4 class="card-title mb-4">Thanh Toán</h4>
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
               <li class="nav-item" role="presentation">
-                <a
-                  class="nav-link active"
-                  id="pills-home-tab"
-                  data-toggle="pill"
-                  href="#pills-home"
-                  role="tab"
-                  aria-controls="pills-home"
-                  aria-selected="true"
-                  >Card</a
-                >
+                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                  aria-controls="pills-home" aria-selected="true">Card</a>
               </li>
               <li class="nav-item" role="presentation">
-                <a
-                  class="nav-link"
-                  id="pills-profile-tab"
-                  data-toggle="pill"
-                  href="#pills-profile"
-                  role="tab"
-                  aria-controls="pills-profile"
-                  aria-selected="false"
-                  >Thanh toán khi nhận hàng</a
-                >
+                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                  aria-controls="pills-profile" aria-selected="false">Paypal</a>
               </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
-              <div
-                class="tab-pane fade show active"
-                id="pills-home"
-                role="tabpanel"
-                aria-labelledby="pills-home-tab"
-              >
+              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <div class="form-group">
                   <label for="username">Name on card</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="username"
-                    placeholder="Ex. John Smith"
-                    required=""
-                  />
+                  <input type="text" class="form-control" name="username" placeholder="Ex. John Smith" required="" />
                 </div>
                 <!-- form-group.// -->
 
                 <div class="form-group">
                   <label for="cardNumber">Card number</label>
                   <div class="input-group">
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="cardNumber"
-                      placeholder=""
-                    />
+                    <input type="text" class="form-control" name="cardNumber" placeholder="" />
                     <div class="input-group-append">
                       <span class="input-group-text">
                         <i class="fab fa-cc-visa"></i> &nbsp;
@@ -143,12 +209,9 @@
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
-                      <label
-                        data-toggle="tooltip"
-                        title=""
-                        data-original-title="3 digits code on back side of the card"
-                        >CVV <i class="fa fa-question-circle"></i
-                      ></label>
+                      <label data-toggle="tooltip" title=""
+                        data-original-title="3 digits code on back side of the card">CVV <i
+                          class="fa fa-question-circle"></i></label>
                       <input class="form-control" required="" type="text" />
                     </div>
                     <!-- form-group.// -->
@@ -162,67 +225,87 @@
                   eiusmod
                 </p>
               </div>
-              <div
-                class="tab-pane fade"
-                id="pills-profile"
-                role="tabpanel"
-                aria-labelledby="pills-profile-tab"
-              >
-                Thanh toán khi nhận hàng
+              <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+                <div id="paypal-button-container"></div>
+
+                <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD&disable-funding=credit"></script>
+
+                <script>
+                  // Render the PayPal button into #paypal-button-container
+                  paypal.Buttons({
+
+                    style: {
+                      color: 'blue',
+                      shape: 'rect',
+                      label: 'pay',
+                      height: 40
+                    },
+
+                    // Set up the transaction
+                    createOrder: function (data, actions) {
+                      return actions.order.create({
+                        purchase_units: [{
+                          amount: {
+                            value: '1.01'
+                          }
+                        }]
+                      });
+                    },
+
+                    // Finalize the transaction
+                    onApprove: function (data, actions) {
+                      return actions.order.capture().then(function (details) {
+                        // Show a success message to the buyer
+                        alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                      });
+                    }
+
+
+                  }).render('#paypal-button-container');
+                </script>
+                <!-- form-group.// -->
+
+                
+              </div>
+            </div>
+      </main>
+     
+      
+    <form class=" col-md-6" action="{% url 'checkout' %}" method="POST">
+      {% csrf_token %}
+        <div class="card mb-4">
+          <div class="card-body">
+            <h4 class="card-title mb-4">Giao Hàng</h4>
+            <div class="form-group">
+              <label for="username">Địa chỉ</label>
+              <input type="text" class="form-control" name="diachi" required="" />
+            </div>
+            <div class="form-group">
+              <label><span class="hidden-xs">Đơn vị vận chuyển</span> </label>
+              <div class="form-inline" style="min-width: 220px">
+                <select class="form-control" style="width: 100%" name="hinhthuc">
+                  <option>Giao hàng nhanh - 25.000 đ</option>
+                  <option>Giao hàng tiết kiệm - 30.000 đ</option>
+                  <option>J&T Express - 27.000 đ</option>
+                </select>
               </div>
             </div>
           </div>
         </div>
-      </main>
-      <div class="d-flex justify-content-end" style="width: 100%">
-        <button
-          class="subscribe btn btn-primary btn-block py-2"
-          type="button"
-          style="width: 150px"
-        >
-          Continue
-        </button>
-      </div>
+      <button class="subscribe btn btn-primary btn-block py-2" type="submit" style="width: 150px">Thanh Toán</button>
+    </form>
     </div>
+
   </div>
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
 <!-- ========================= SECTION  ========================= -->
-<section class="section-name bg padding-y">
-  <div class="container">
-    <h6>Payment and refund policy</h6>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </p>
-  </div>
-  <!-- container // -->
-</section>
+
 <!-- ========================= SECTION  END// ========================= -->
 
 <!-- ========================= FOOTER ========================= -->
 <footer class="section-footer border-top padding-y">
-  <div class="container">
-    <p class="float-md-right">&copy Copyright 2019 All rights reserved</p>
-    <p>
-      <a href="#">Terms and conditions</a>
-    </p>
-  </div>
-  <!-- //container -->
-</footer>
+
 {% endblock %}

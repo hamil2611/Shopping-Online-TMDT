@@ -1,12 +1,13 @@
 from audioop import add
 from multiprocessing import context
+from re import S
 from unicodedata import category
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, HttpResponseRedirect
 from Cart.models import Cart
-from .models import User, Comment
+from .models import Order, Payment, Shipment, User, Comment
 from django.contrib.auth import authenticate, decorators, logout
 from Product.models import Book, Laptop, Mobilephone, Clothes
 from django.shortcuts import get_object_or_404
@@ -170,7 +171,35 @@ def add_to_cart(request, id, quantity, category):
             return HttpResponseRedirect("/home/")
         
     #return render(request, "Cart/cart.html", context)
-
+def checkout(request):
+    username = request.session.get('username')
+    context = getCart(username,request)
+    if request.method == 'POST':
+        address = request.POST["diachi"]
+        method_transport = request.POST["hinhthuc"]
+        ship = Shipment.objects.create(address=address,method_transport=method_transport)
+        ship.save()
+        ship_id = Shipment.objects.all().last()
+        shipment_id=ship_id.shipment_id
+        customer = User.objects.get(username=username)
+        list = Cart.objects.all().filter(customer=customer)
+        listBook = []
+        listLaptop = []
+        listClothes = []
+        listMobilePhone = []
+        for item in list:
+            if getCartItemBook(item): listBook.append(getCartItemBook(item))
+            if getCartItemLaptop(item): listLaptop.append(getCartItemLaptop(item))
+            if getCartItemClothes(item): listClothes.append(getCartItemClothes(item))
+            if getCartItemMobilePhone(item): listMobilePhone.append(getCartItemMobilePhone(item))
+        totalPrice = getTotalPrice(listBook)
+        pay = Payment.objects.create(totalprice =totalPrice)
+        pay_id = Payment.objects.all().last()
+        o = Order.objects.create(shipment_id=shipment_id,payment_id=pay_id.payment_id, user = username)
+        o.save()
+        Cart.objects.all().delete()
+        return HttpResponseRedirect("/home/")
+    return render(request,"pages/checkout.html",context)
 # Common
 def getListItem():
     list_book = Book.objects.all()[:4]
@@ -196,7 +225,7 @@ def getCart(username,request):
         if getCartItemClothes(item): listClothes.append(getCartItemClothes(item))
         if getCartItemMobilePhone(item):
             listMobilePhone.append(getCartItemMobilePhone(item))
-    totalPrice = getTotalPrice(listBook)
+    totalPrice = float(getTotalPrice(listBook)) 
     context = {'listBook': listBook,
                'listLaptop': listLaptop, 'listClothes': listClothes, 'listMobilePhone': listMobilePhone, 'totalPrice': totalPrice}
     context['username'] = getFirstname(request)
@@ -246,7 +275,7 @@ def getCartItemMobilePhone(item):
 
 
 def getTotalPrice(list):
-    total = 0
+    total = 0 
     for item in list:
         total += item['totalPrice']
     return total

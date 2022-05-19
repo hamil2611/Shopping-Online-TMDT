@@ -1,4 +1,5 @@
 from secrets import choice
+from tkinter.messagebox import NO
 from django.db import models
 
 # Create your models here.
@@ -17,4 +18,17 @@ class Comment(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     product_id = models.IntegerField(default=0)
     category_id = models.IntegerField(default=0)
+    user = models.CharField(max_length=100,default=None)
+class Shipment(models.Model):
+    shipment_id = models.AutoField(primary_key=True,default=None)
+    address = models.CharField(max_length=100,default=None)
+    method_transport = models.CharField(max_length=100,default=None)
+class Payment(models.Model):
+    payment_id =models.AutoField(primary_key=True,default=None)
+    payment_method = models.CharField(max_length=100, default="")
+    totalprice = models.FloatField(default=None)
+class Order(models.Model):
+    order_id = models.AutoField(primary_key=True,default=None)
+    payment_id = models.CharField(max_length=100,default=None)
+    shipment_id = models.CharField(max_length=100,default=None)
     user = models.CharField(max_length=100,default=None)

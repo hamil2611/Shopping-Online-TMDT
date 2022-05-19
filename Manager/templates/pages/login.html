@@ -9,12 +9,6 @@
       </h4>
       <form action="{% url 'checklogin'%}" method="POST">
         {% csrf_token %}
-        <a href="#" class="btn btn-facebook btn-block mb-2">
-          <i class="fab fa-facebook-f"></i> &nbsp Sign in with Facebook</a
-        >
-        <a href="#" class="btn btn-google btn-block mb-4">
-          <i class="fab fa-google"></i> &nbsp Sign in with Google</a
-        >
         <div class="form-group">
           <input
             name="username"
@@ -69,13 +63,6 @@
 
 <!-- ========================= FOOTER ========================= -->
 <footer class="section-footer border-top padding-y">
-  <div class="container">
-    <p class="float-md-right">&copy Copyright 2019 All rights reserved</p>
-    <p>
-      <a href="#">Terms and conditions</a>
-    </p>
-  </div>
-  <!-- //container -->
 </footer>
 <!-- ========================= FOOTER END // ========================= -->
 {% endblock %}
