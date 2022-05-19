@@ -8,6 +8,12 @@ def listlaptop(request):
     list_laptop = Laptop.objects.all()
     context = {"dslaptop":list_laptop}
     return render(request, "Laptop/viewlaptop.html",context)
+
+def listlaptop_customer(request):
+    list_laptop = Laptop.objects.all()
+    context = {"dslaptop":list_laptop}
+    return render(request, "Laptop/see_all_laptop.html",context)
+
 def savelaptop(request):
     category = Category.objects.get(product_type='Laptop')
     name = request.POST["tenlaptop"]

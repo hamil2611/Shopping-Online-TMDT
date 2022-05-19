@@ -8,6 +8,12 @@ def listcolothes(request):
     list_clothes = Clothes.objects.all()
     context = {"dsclothes":list_clothes}
     return render(request, "Clothes/viewclothes.html",context)
+
+def listclothes_customer(request):
+    list_clothes = Clothes.objects.all()
+    context = {"dsclothes":list_clothes}
+    return render(request, "Clothes/see_all_clothes.html",context)
+
 def saveclothes(request):
     category = Category.objects.get(product_type='Clothes')
     name = request.POST["ten"]

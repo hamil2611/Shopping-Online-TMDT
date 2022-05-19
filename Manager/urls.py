@@ -34,17 +34,17 @@ urlpatterns = [
     path('viewbook/<int:book_id>', bookDAO.deletebook, name="delete"),
     path('pageaddlaptop/',laptopDAO.pageaddlaptop, name="pageaddlaptop"),
     path('savelaptop/', laptopDAO.savelaptop, name="savelaptop"),
-
+    path('see_all_laptop/', laptopDAO.listlaptop_customer, name="see_all_laptop"),
     #Mobilephone
     path('viewmobilephone/',mobilephoneDAO.listmobile,name="viewmobilephone"),
     path('pageaddmobilephone/',mobilephoneDAO.pageaddmobilephone,name="pageaddmobilephone"),
     path('savemobilephone/', mobilephoneDAO.savemobile, name="savemobilephone"),
-
+    path('see_all_mobile/', mobilephoneDAO.listmobile_customer, name="see_all_mobile"),
     #Clothes 
     path('viewclothes/',clothesDAO.listcolothes,name="viewclothes"),
     path('pageaddclothes/',clothesDAO.pageaddclothes,name="pageaddclothes"),
     path('saveclothes/', clothesDAO.saveclothes, name="saveclothes"),
-
+    path('see_all_clothes/', clothesDAO.listclothes_customer, name="see_all_clothes"),
     #Product_detail
     path('product_detail_book/id=<int:id>',views.product_detail_book,name="product_detail_book"),
     path('product_detail_laptop/id=<int:id>',views.product_detail_laptop,name="product_detail_laptop"),

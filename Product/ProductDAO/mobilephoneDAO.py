@@ -8,6 +8,10 @@ def listmobile(request):
     list_mobile = Mobilephone.objects.all()
     context = {"dsmobile":list_mobile}
     return render(request, "Mobilephone/viewmobilephone.html",context)
+def listmobile_customer(request):
+    list_mobile = Mobilephone.objects.all()
+    context = {"dsmobile":list_mobile}
+    return render(request, "Mobilephone/see_all_mobile.html",context)    
 def savemobile(request):
     category = Category.objects.get(product_type='Mobilephone')
     name = request.POST["ten"]

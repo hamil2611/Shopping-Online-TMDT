@@ -11,6 +11,7 @@ from .models import Order, Payment, Shipment, User, Comment
 from django.contrib.auth import authenticate, decorators, logout
 from Product.models import Book, Laptop, Mobilephone, Clothes
 from django.shortcuts import get_object_or_404
+from django.db.models import Count
 # Create your views here.
 
 def handleLogout(request):
@@ -54,13 +55,14 @@ def login(request):
         return render(request, "Base/base.html")
     else:
         request.session['username'] = tk
+        soluongCart = countCart(request)
         first = getFirstname(request)
         list_book = Book.objects.all()[:4]
         list_laptop = Laptop.objects.all()[:4]
         list_mobile = Mobilephone.objects.all()[:4]
         list_clothes = Clothes.objects.all()[:4]
         context = {"dsbook": list_book, "dslaptop": list_laptop,
-                   "dsmobile": list_mobile, "dsclothes": list_clothes, "username": first}
+                   "dsmobile": list_mobile, "dsclothes": list_clothes, "username": first,"soluongCart":soluongCart}
         return render(request, "Base/customer_viewlistproduct.html", context)
 
 # showlist_product_customer
@@ -283,8 +285,16 @@ def getTotalPrice(list):
 def getFirstname(request):
     username = request.session.get('username')
     firstname = User.objects.get(username=username)
-    
     return firstname
+
+def countCart(request):
+    username = request.session.get('username')
+    customer = User.objects.get(username=username)
+    getCart = Cart.objects.all().filter(customer=customer)
+
+    count=len(getCart)
+    print(count)
+    return count
 
 @decorators.login_required(login_url='/login/')
 def addcomment(request,book_id):
